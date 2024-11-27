@@ -1,9 +1,62 @@
-// Comando para establecer el checkpoint cuando pasa por un jugador
+// Comando para establecer el checkpoint cuando pasa por alguna coordenada
+
+// Se crean scoreboards
+/scoreboard objectives add CheckpointX dummy
+/scoreboard objectives add CheckpointY dummy
+/scoreboard objectives add CheckpointZ dummy
+/scoreboard objectives add LastCheckpoint dummy
+
+// Se inicializa en 0 el checkpoint, dependiendo cuantos exista va aumentando
+/scoreboard players set @s LastCheckpoint 0
+
+// Se obtiene bloques de comando
+/give @p minecraft:command_block
+
+// Establecer spawn
+/setworldspawn
+
+// 0,-59,-13
+
+// Primer bloque: Repeat, Unconditional, Always
+// Revisa si el LastCheckpoint es 0 para evitar que se repita el mensaje
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX 0
+
+// Segundo bloque: Chain, Conditional, Always
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -59
+
+// Tercer bloque: Chain, Conditional, Always
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointZ -13
+
+// Cuarto bloque: Chain, Conditional, Always
+/execute as @a[scores={CheckpointX=0,CheckpointY=-59,CheckpointZ=-13, LastCheckpoint=0}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"green"}
+
+// Quinto bloque: Chain, Conditional, Always
+/execute as @a[scores={CheckpointX=0,CheckpointY=-59,CheckpointZ=-13, LastCheckpoint=0}] run scoreboard players set @s LastCheckpoint 1
+
+
+// -9,-58,-16
+/execute as @a[scores={LastCheckpoint=1}] at @s if entity @s[x=-9,y=-58,z=-16,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX -9
+/execute as @a[scores={LastCheckpoint=1}] at @s if entity @s[x=-9,y=-58,z=-16,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -58
+/execute as @a[scores={LastCheckpoint=1}] at @s if entity @s[x=-9,y=-58,z=-16,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointZ -16
+/execute as @a[scores={CheckpointX=-9,CheckpointY=-58,CheckpointZ=-16, LastCheckpoint=1}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"gold"}
+/execute as @a[scores={CheckpointX=-9,CheckpointY=-58,CheckpointZ=-16, LastCheckpoint=1}] run scoreboard players set @s LastCheckpoint 2
+
+// -23,-57, -19
+/execute as @a[scores={LastCheckpoint=2}] at @s if entity @s[x=-23,y=-57,z=-19,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX -23
+/execute as @a[scores={LastCheckpoint=2}] at @s if entity @s[x=-23,y=-57,z=-19,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -57
+/execute as @a[scores={LastCheckpoint=2}] at @s if entity @s[x=-23,y=-57,z=-19,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointZ -19
+/execute as @a[scores={CheckpointX=-23,CheckpointY=-57,CheckpointZ=-19, LastCheckpoint=2}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"blue"}
+/execute as @a[scores={CheckpointX=-23,CheckpointY=-57,CheckpointZ=-19, LastCheckpoint=2}] run scoreboard players set @s LastCheckpoint 3
+
+// Objeto de respawn
+/execute as @a[nbt={SelectedItem:{id:"minecraft:nether_star"}}] run tp @s 0 ~ 0
+
+
 //Always
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=0,dz=0] run data merge entity @s {Checkpoint:{X:34,Y:-59,Z:-13}}
+/execute as @a at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=0,dz=0] run data merge entity @s {Checkpoint:{X:0,Y:-59,Z:-13}}
 // Este funciona
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=1,dy=1,dz=1] run tellraw @s {"text":"Checkpoint guardado.","color":"blue"}
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=1,dy=1,dz=1] run data merge entity @s {Checkpoint:{X:34,Y:-59,Z:-13}}
+/execute as @a at @s if entity @s[x=0,y=-59,z=-13,dx=1,dy=1,dz=1] run tellraw @s {"text":"Checkpoint guardado.","color":"blue"}
+/execute as @a at @s if entity @s[x=0,y=-59,z=-13,dx=1,dy=1,dz=1] run data merge entity @s {Checkpoint:{X:0,Y:-59,Z:-13}}
 
 
 /execute as @a[nbt={Checkpoint:{X:34,Y:-59,Z:-13}}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"green"}
@@ -12,14 +65,10 @@
 /execute as @a at @s if entity @s[distance=..1.5] positioned 34.438 -59 -13.4 run data merge entity @s {Checkpoint:{X:34.438,Y:-59,Z:-13.4}}
 
 
-// Se crean scoreboards
-/scoreboard objectives add CheckpointX dummy
-/scoreboard objectives add CheckpointY dummy
-/scoreboard objectives add CheckpointZ dummy
+/execute as @a[nbt={SelectedItem:{id:"minecraft:stick"}'}] run say Hola
 
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX 34
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -59
-/execute as @a at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointZ -13
+
+
 
 /execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX 34
 /execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=34,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -59
