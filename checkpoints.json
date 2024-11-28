@@ -9,13 +9,24 @@
 // Se inicializa en 0 el checkpoint, dependiendo cuantos exista va aumentando
 /scoreboard players set @s LastCheckpoint 0
 
+// Ver score
+/scoreboard players get TheChrisVazquez LastCheckpoint
+
 // Se obtiene bloques de comando
-/give @p minecraft:command_block
+/give @p minecraft:command_bloc
 
-// Establecer spawn
-/setworldspawn
 
-// 0,-59,-13
+/execute as @a at @s if block ~ ~-1 ~ minecraft:blue_wool run execute store result score @s CheckpointX run data get entity @s Pos[0] 1
+/execute as @a at @s if block ~ ~-1 ~ minecraft:blue_wool run execute store result score @s CheckpointY run data get entity @s Pos[1] 1
+/execute as @a at @s if block ~ ~-1 ~ minecraft:blue_wool run execute store result score @s CheckpointZ run data get entity @s Pos[2] 1
+
+
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointX 0
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointY -59
+/execute as @a[scores={LastCheckpoint=0}] at @s if entity @s[x=0,y=-59,z=-13,dx=0,dy=1,dz=0] run scoreboard players set @s CheckpointZ -13
+/execute as @a[scores={LastCheckpoint=0}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"green"}
+/execute as @a[scores={LastCheckpoint=0}] run scoreboard players set @s LastCheckpoint 1
+
 
 // Primer bloque: Repeat, Unconditional, Always
 // Revisa si el LastCheckpoint es 0 para evitar que se repita el mensaje
@@ -94,3 +105,16 @@
 /execute as @e[tag=CheckpointMarker] store result entity @s Pos[2] double 1 run scoreboard players get @p CheckpointZ
 
 /execute as @p at @s run tp @s @e[tag=CheckpointMarker,limit=1]
+
+
+/summon minecraft:armor_stand ~ ~2 ~ {Tags:["parkour_checkpoint"],Invisible:1b}
+/execute at @p if block ~ ~-1 ~ minecraft:gold_block run tp @e[type=minecraft:armor_stand,tag=parkour_checkpoint] ~ ~ ~
+/execute at @p if block ~ ~-1 ~ minecraft:deepslate run execute at @e[type=minecraft:armor_stand,tag=parkour_checkpoint] run tp @p ~ ~ ~
+
+summon minecraft:armor_stand ~ ~2 ~ {Tags:["parkour_checkpoint_player_1"],Invisible:1b}
+
+execute at @p[tag=player_1] if block ~ ~-1 ~ minecraft:gold_block run tp @e[type=minecraft:armor_stand,tag=parkour_checkpoint_player_1] ~ ~ ~
+
+execute at @p[tag=player_1] if block ~ ~-1 ~ minecraft:deepslate run execute at @e[type=minecraft:armor_stand,tag=parkour_checkpoint_player_1] run tp @p[tag=player_1] ~ ~ ~
+
+/give @p stick{display:{Name:'{"text":"Palo Mágico"}'}} 1
