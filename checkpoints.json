@@ -121,9 +121,9 @@ execute at @p[tag=player_1] if block ~ ~-1 ~ minecraft:deepslate run execute at 
 
 
 /execute as @a[scores={LastCheckpoint=0}] if block ~ ~-1 ~ minecraft:gold_block run spawnpoint
-/execute as @a[scores={LastCheckpoint=0}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"blue"}
+/execute as @a[scores={LastCheckpoint=0}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"aqua"}
 /scoreboard players set @p LastCheckpoint 1
 
 /execute as @a[scores={LastCheckpoint=1}] at @p if block ~ ~-1 ~ minecraft:diamond_block run spawnpoint
-/execute as @a[scores={LastCheckpoint=1}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"blue"}
+/execute as @a[scores={LastCheckpoint=1}] run tellraw @s {"text":"¡Checkpoint establecido!","color":"aqua"}
 /scoreboard players set @p LastCheckpoint 2
