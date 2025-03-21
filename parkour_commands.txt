@@ -1,0 +1,16 @@
+#Crea un armor stand con un tag perzonalizado
+/summon minecraft:armor_stand ~ ~2 ~ {Tags:["parkour_checkpoint"]}
+#Invisible
+/summon minecraft:armor_stand ~ ~2 ~ {Tags:["parkour_checkpoint"],Invisible:1b}
+
+#Hace tp al stand hacia tu posición cuando estás por encima de un bloque determinado
+/execute at @p if block ~ ~-1 ~ minecraft:gold_block run tp @e[type=minecraft:armor_stand,tag=parkour_checkpoint] ~ ~ ~
+
+#Te hace tp hacia el stand si estás por encima de un bloque determinado
+/execute at @p if block ~ ~-1 ~ minecraft:deepslate_bricks run execute at @e[type=minecraft:armor_stand,tag=parkour_checkpoint] run tp @p ~ ~ ~
+
+#Hace tp hacia el estand si seleccionas un item determinado
+/execute as @a[nbt={SelectedItem:{id:"minecraft:diamond_sword"}}] run execute at @e[type=minecraft:armor_stand,tag=parkour_checkpoint] run tp @p ~ ~ ~
+
+#Destruye todos los stand cercanos
+/kill @e[type=minecraft:armor_stand]
