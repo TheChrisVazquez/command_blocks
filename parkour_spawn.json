@@ -1,0 +1,31 @@
+#
+
+/execute as @a at @s if block ~ ~-1 ~ minecraft:gold_block run spawnpoint @s ~ ~ ~
+
+/give @a gold_block[custom_data={contador:1}] 1
+
+/execute if entity @p[distance=..20] run say Estás cerca
+
+
+/execute as @a[distance=..2] at @s if block ~ ~-1 ~ minecraft:gold_block run spawnpoint @s ~ ~ ~
+
+#Crea el score
+/scoreboard objectives add parkourCount dummy
+
+#muestra el score
+/scoreboard objectives setdisplay sidebar parkourCount
+
+#asigna valor
+/scoreboard players set Dev parkourCount 0
+
+#obtiene valor
+/scoreboard players get Dev parkourCount 5
+
+Reset
+/scoreboard players reset Dev parkourCount
+
+/execute as @a[distance=..2] at @s if block ~ ~-1 ~ minecraft:gold_block if score @s parkourCount matches 0 run scoreboard players set @s parkourCount 1
+
+/tellraw @p {"text":"spawn guardado","color":"green","bold":true}
+
+/spawnpoint @p ~ ~ ~
