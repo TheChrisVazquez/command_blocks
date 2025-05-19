@@ -21,9 +21,12 @@
 #obtiene valor
 /scoreboard players get Dev parkourCount 5
 
-Reset
+#reset del score
 /scoreboard players reset Dev parkourCount
 
+#
+#Esto es para los cubos
+#
 /execute as @a[distance=..2] at @s if block ~ ~-1 ~ minecraft:gold_block if score @s parkourCount matches 0 run scoreboard players set @s parkourCount 1
 
 /tellraw @p {"text":"spawn guardado","color":"green","bold":true}
