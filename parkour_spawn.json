@@ -28,4 +28,4 @@ Reset
 
 /tellraw @p {"text":"spawn guardado","color":"green","bold":true}
 
-/spawnpoint @p ~ ~ ~
+/spawnpoint @p ~ ~1 ~
