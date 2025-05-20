@@ -1,0 +1,15 @@
+
+/scoreboard objectives add sec dummy
+/scoreboard objectives add ticks dummy
+/scoreboard players set Dev sec 0
+/scoreboard players set Dev ticks 1
+
+#suma 1 al score
+/scoreboard players add Dev ticks 1
+#Si hay 20 ticks se suma 1 segundo
+/execute as @a[scores={ticks=20..}] run scoreboard players add Dev sec 1
+#Se devuelve a 0 el contandor de ticks
+/scoreboard players set Dev ticks 0
+
+
+/title @p actionbar {"text":"ticks = ","extra":[{"score":{"name":"@p","objective":"ticks"}},{"text":", sec = "},{"score":{"name":"@p","objective":"sec"}}]}
