@@ -16,7 +16,7 @@
 /execute as @a[distance=..5] at @s if block ~ ~-1 ~ minecraft:gold_block if score @s startChrono matches 0 run scoreboard players add @s startChrono 1
 /execute as @a at @s if block ~ ~-1 ~ minecraft:gold_block if score @s starChrono matches 0 run scoreboard players add @s starChrono 1
 
-/execute as @a at @s if score @s starChrono matches 1 scoreboard players add Dev ticks 1
+/execute as @a at @s if score @s startChrono matches 1 run scoreboard players add Dev ticks 1
 
 #Si hay 20 ticks se suma 1 segundo
 /execute as @a[scores={ticks=20..}] run scoreboard players add Dev sec 1
